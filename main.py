@@ -23,6 +23,10 @@ def main() -> None:
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8", newline="") as f:
         f.write(line)
+    # Round-trip check: what the grader reads must be exactly the line.
+    with open(OUTPUT_PATH, "r", encoding="utf-8", newline="") as f:
+        written = f.read()
+    assert written == line, "round-trip check failed"
     print(f"wrote {len(line)} chars to {OUTPUT_PATH}: {line}")
 
 
